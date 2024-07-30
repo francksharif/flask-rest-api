@@ -8,7 +8,7 @@ from . import db
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primry_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.Text(), nullable=False )
@@ -33,7 +33,7 @@ class Bookmark(db.Model):
     updated_at = db.Column(db.DateTime, onupdate=datetime.now())
 
     # Foreign key
-    user_id = db.Column(db.Integer(), db.ForeignKey)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
