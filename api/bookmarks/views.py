@@ -7,7 +7,7 @@ from flask_jwt_extended.view_decorators import jwt_required
 from .. import db
 import validators
 
-# Create a new Bookmark
+# Create a new Bookmark and Retrieve all Bookmarks
 @bookmarks.route('/', methods=['GET', 'POST'])
 @jwt_required()
 def handle_bookmarks():
@@ -68,3 +68,21 @@ def handle_bookmarks():
 
         return jsonify({'data':data, 'meta': meta}), HTTP_200_OK
 
+
+# Retrieve one bookmark
+@bookmarks.route('/<int:id>')
+@jwt_required()
+def get_bookmark(id):
+    current_user = get_jwt_identity()
+    bookmark = Bookmark.query.filter_by(user_id=current_user, id=id).first()
+    
+    if not bookmark:
+        return jsonify({'message': 'Item not found'}), HTTP_404_NOT_FOUND
+    
+    return jsonify({
+            'id': bookmark.id,
+            'url': bookmark.url,
+            'body': bookmark.body,
+            'created_at': bookmark.created_at,
+            'updated_at': bookmark.updated_at
+    }), HTTP_200_OK
