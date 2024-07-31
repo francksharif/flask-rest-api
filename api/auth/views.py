@@ -5,13 +5,15 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from ..models import User
 from ..constants.http_status_code import *
 from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required
+from flasgger import swag_from
 from .. import db
 
 
-
 # Registering a new User 
-@auth.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['POST'])
+@swag_from('./docs/register.yaml')
 def register():
+    
     username = request.json['username']
     email = request.json['email']
     password = request.json['password']
@@ -55,7 +57,8 @@ def register():
 
 
 # Login a registered User
-@auth.route('/login', methods=['GET', 'POST'])
+@auth.route('/login', methods=['POST'])
+@swag_from('./docs/login.yaml')
 def login():
     email = request.json.get('email')
     password = request.json.get('password')

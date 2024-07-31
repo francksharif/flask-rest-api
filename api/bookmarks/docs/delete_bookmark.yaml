@@ -1,0 +1,16 @@
+Delete a Bookmark
+---
+tags:
+  - Bookmarks
+parameters:
+  - name: id
+    in: path
+    required: true
+    type: integer
+    description: ID of the bookmark to delete
+    example: 1
+responses:
+  204:
+    description: ' '
+  404:
+    description: Bookmark not found

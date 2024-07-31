@@ -1,7 +1,4 @@
 import os
-from flasgger import Swagger, swag_from
-
-
 base_dir = os.path.abspath(os.path.dirname(__file__))
 
 
