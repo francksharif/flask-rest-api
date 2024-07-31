@@ -1,5 +1,7 @@
 # Flask REST API
 
+
+![Logo](api.png)
 ## Description
 A REST API app built with Flask (for Bookmarks).
 
